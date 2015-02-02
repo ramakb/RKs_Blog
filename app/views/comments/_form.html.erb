@@ -1,4 +1,14 @@
 <%= form_for([@post, @post.comments.build]) do |f| %>
+  <% if @post.comments.errors.any? %>
+     <div id="errors">
+        <h2 style="color: red;"><%= pluralize(@post.comments.errors.count, "error") %> prevented this comment from saving </h2>
+         <ul>
+           <% @post.comments.errors.full_messages.each do |msg| %>
+             <li><%= msg %></li>
+            <% end %>
+         </ul>
+      </div>
+   <% end %>
 	<%= f.label :name %><br>
 	<%= f.text_field :name %><br>
 	<br>
